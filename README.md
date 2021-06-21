@@ -4,7 +4,7 @@
 所以才想出這個主題，連結政府官方的資料API，再結合之前學過的LINEBOT，將兩者API整合，  
 當使用者在聊天室輸入正確的水庫名稱，就能知道即時的水庫資訊、圖表等。
 ## Build Process
-* 首先建立LINE Bot的人機互動之前，要先安裝ngrok建立連線，和一些必備的套件(LINE Bot, Flask)  
+* 首先建立LINE Bot的人機互動之前，要先安裝ngrok(至官網下載)建立連線，和一些必備的套件(LINE Bot, Flask)  
 ```pip install flask```  
 ```pip install line-bot-sdk==1.8.0``` 
 
