@@ -4,39 +4,49 @@
 所以才想出這個主題，連結政府官方的資料API，再結合之前學過的LINEBOT，將兩者API整合，  
 當使用者在聊天室輸入正確的水庫名稱，就能知道即時的水庫資訊、圖表等。
 ## Build Process
-* 首先建立LINE Bot的人機互動之前，要先安裝ngrok(至官網下載)建立連線，和一些必備的套件(LINE Bot, Flask) 
+* 首先建立LINE Bot的人機互動之前，要先安裝ngrok(至官網下載)建立連線，和一些必備的套件(LINE Bot, Flask)  
 可至另一個文件看詳細的LINE Bot建設流程、和說明：[README_linebot.md](https://github.com/cpc0401/final_project/blob/main/README_linebot.md)
 
-* 再來是撰寫路由的建立和LINE Bot機器人對使用者回應的一些function等等(也要至LINE Developer進行創建跟設定機器人)。  
-> e.g. app@route、@handler.add、line_bot_api.reply_message()等指令  
+* 再來是撰寫路由的建立和LINE Bot機器人對使用者回應的一些function等等(也要至LINE Developer進行創建跟設定機器人)，  
+在[README_linebot.md](https://github.com/cpc0401/final_project/blob/main/README_linebot.md)
+也有做說明。
 
 * 接下來，開始處理水利署公開水庫資料的API連結，需要引用一些套件  
 ```import urllib.request as request```  
 
-* 再利用request的功能與網站做連結
-> with request.urlopen(link) as response:
+* 再利用request的功能與網站做連結  
+`with request.urlopen(link) as response:`
 
 * 處理json檔格式之前，要先引用json套件  
 ```import json```
 
-* 再來利用function將資料整理成json的格式
-> data = json.load(response)
+* 再來利用function將資料整理成json的格式  
+`data = json.load(response)`
 
 引進公開資料之後，開始過濾掉我們不需要的資料和建立我們所需的資料格式、資料庫；  
 整理完資料，開始撰寫搜尋使用者想知道的水庫資訊的function；找到結果之後，開始製圖  
 * 製圖之前，須先安裝matplotlib  
 ```pip install matplotlib```  
 
-開始撰寫製圖的function！(matplotlib語法可上網參考)
+開始撰寫製圖的function！(matplotlib語法可上網參考 e.g. [matplotlib語法教學](https://ithelp.ithome.com.tw/articles/10232059))  
 製圖完成後，得先上傳至imgur，再回傳連結到LINE bot那邊，回應使用者水庫即時的資訊表、圖表。
 * but 須先引用函式庫，才能上傳圖片   
 ```import pyimgur```
 
-* 再來要到Imgur API網站進行設定，拿取CLIENT_ID才能使用Imgur的API；
-> 可到[register their application](https://api.imgur.com/oauth2/addclient)
+* 再來要到Imgur API網站進行設定，拿取CLIENT_ID才能使用Imgur的API：   
+> 到[register their application](https://api.imgur.com/oauth2/addclient)
 進行設定註冊，Authorization type勾選第二個，其他隨意。
-
-接下來就是回傳圖片連結，給予LINE Bot機器人回應水庫即時圖表給使用者，  
+* 製圖完成後，存檔 -> 上傳 -> 回傳連結
+```plt.savefig('send.png') # 存擋
+    CLIENT_ID = "6e4973490637fba" # 設定imgur的CLIENT_ID
+    PATH = "send.png"
+    im = pyimgur.Imgur(CLIENT_ID)
+    uploaded_image = im.upload_image(PATH, title="Uploaded with PyImgur") # 上傳至imgur
+    return uploaded_image.link # return 圖片的連結回來
+ ```
+ 
+接下來就是在LINE Bot的@handler.add當中，呼叫reservoir.py中的search_info function，會得到圖片連結，  
+再用`ImageSendMessag`的形式進行`line_bot_api.reply()`  
 以上就是大概的Build Process！
 
 ## Details of the Approach
@@ -45,8 +55,9 @@
 比較簡單的部分就是水庫資料的讀取和分類，都是不斷地看清楚、分析資料的格式，再進行function的撰寫，分類好所需的資料。
 
 ## References
-* API：Flask、LINE Bot、Government Official Reservoir Data
-* Data used：Government Official Reservoir Data
+* API：Flask、LINE Bot、Imgur、Government Official Reservoir Data
+* Data used：[水庫每日營運狀況](https://data.gov.tw/dataset/41568)
+、[水庫水情資料](https://data.gov.tw/dataset/45501)
 * [matplotlib教學](https://ithelp.ithome.com.tw/articles/10232059)
 ## Results
 * 聊天室內容截圖（不正確的水庫名稱則不回傳圖片）  
