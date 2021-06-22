@@ -8,4 +8,4 @@
 <img width="500" alt="截圖 2021-06-22 下午12 11 43" src="https://user-images.githubusercontent.com/86058459/122862043-17349380-d353-11eb-9f9a-cbe3890b1782.png">
 
 
-* Channel Name、Description、Category等等都隨意設定，URL的欄位都
+* Channel Name、Description、Category等等都隨意設定，URL的欄位都留空沒關係。
