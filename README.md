@@ -5,10 +5,10 @@
 當使用者在聊天室輸入正確的水庫名稱，就能知道即時的水庫資訊、圖表等。
 ## Build Process
 * 首先建立LINE Bot的人機互動之前，要先安裝ngrok(至官網下載)建立連線，和一些必備的套件(LINE Bot, Flask)  
-可至另一個文件看詳細的LINE Bot建設流程、和說明：[README_linebot.md](https://github.com/cpc0401/final_project/blob/main/README_linebot.md)
+可至另一個文件看詳細的LINE Bot建設流程、和說明：[README_linebot.md](https://github.com/cpc0401/final_project/blob/main/linebot_example/README_linebot.md)
 
 * 再來是撰寫路由的建立和LINE Bot機器人對使用者回應的一些function等等(也要至LINE Developer進行創建跟設定機器人)，  
-在[README_linebot.md](https://github.com/cpc0401/final_project/blob/main/README_linebot.md)
+在[README_linebot.md](https://github.com/cpc0401/final_project/blob/main/linebot_example/README_linebot.md)
 也有做說明。
 
 * 接下來，開始處理水利署公開水庫資料的API連結，需要引用一些套件  
