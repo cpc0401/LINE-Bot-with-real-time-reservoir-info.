@@ -8,22 +8,34 @@
 ```pip install flask```  
 ```pip install line-bot-sdk==1.8.0``` 
 
-* 再來是撰寫路由的建立和LINE Bot機器人對使用者回應的一些function等等。  
-接下來，開始處理水利署公開水庫資料的API連結，需要引用一些套件  
+* 再來是撰寫路由的建立和LINE Bot機器人對使用者回應的一些function等等(也要至LINE Developer進行創建跟設定機器人)。  
+> e.g. app@route、@handler.add、line_bot_api.reply_message()等指令  
+
+* 接下來，開始處理水利署公開水庫資料的API連結，需要引用一些套件  
 ```import urllib.request as request```  
 
-* 處理json檔格式  
+* 再利用request的功能與網站做連結
+> with request.urlopen(link) as response:
+
+* 處理json檔格式之前，要先引用json套件  
 ```import json```
+
+* 再來利用function將資料整理成json的格式
+> data = json.load(response)
 
 引進公開資料之後，開始過濾掉我們不需要的資料和建立我們所需的資料格式、資料庫；  
 整理完資料，開始撰寫搜尋使用者想知道的水庫資訊的function；找到結果之後，開始製圖  
 * 製圖之前，須先安裝matplotlib  
 ```pip install matplotlib```  
 
-開始撰寫製圖的function！  
+開始撰寫製圖的function！(matplotlib語法可上網參考)
 製圖完成後，得先上傳至imgur，再回傳連結到LINE bot那邊，回應使用者水庫即時的資訊表、圖表。
 * but 須先引用函式庫，才能上傳圖片   
 ```import pyimgur```
+
+* 再來要到Imgur API網站進行設定，拿取CLIENT_ID才能使用Imgur的API；
+> 可到[register their application](https://api.imgur.com/oauth2/addclient)
+進行設定註冊，Authorization type勾選第二個，其他隨意。
 
 接下來就是回傳圖片連結，給予LINE Bot機器人回應水庫即時圖表給使用者，  
 以上就是大概的Build Process！
