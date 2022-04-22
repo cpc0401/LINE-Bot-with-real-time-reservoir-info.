@@ -1,4 +1,4 @@
-# Final Project Theme : 水庫即時資訊與LINE Bot整合
+# 水庫即時資訊與LINE Bot整合
 ## Introduction
 想到前陣子臺灣的缺水情況很嚴重，大家都不斷關心水庫的水是否有進帳？  
 所以才想出這個主題，連結政府官方的資料API，再結合之前學過的LINEBOT，將兩者API整合，  
